@@ -2,7 +2,7 @@ const Company = require('../models/Company');
 
 const createCompany = async (req,res)=>{
     try{
-        const {name , hr_contacts , note} = req.body;
+        const {name , note , hr_contacts} = req.body;
         if(!name || !hr_contacts || hr_contacts.length ===0){
             return res.status(400).json({
                 success : false,
