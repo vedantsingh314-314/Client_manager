@@ -33,7 +33,7 @@ function App() {
   const handleSubmit = async(event) => {
     event.preventDefault();
     setMessage("Saving...");
-    const validHrData=formData.hrContacts.filter((hr)=>{
+    const validHrContacts=formData.hrContacts.filter((hr)=>{
         return (
           hr.name.trim() !=='' ||
           hr.email.trim() !== '' ||
@@ -50,9 +50,17 @@ function App() {
             hr_contacts: validHrContacts
         }
     );
-
+    setMessage("Saved succesfully ✅")
     console.log(response.data)
-
+    setFormData({
+        companyName: "",
+        note: "",
+        hrContacts: [
+            { name: "", email: "", phone: "" },
+            { name: "", email: "", phone: "" },
+            { name: "", email: "", phone: "" }
+        ]
+    });
   };
 
   return (
