@@ -16,7 +16,7 @@ const sendCustomEmail = async (toEmail, companyName, trackingId) => {
         const EMAIL_SUBJECT = `Invitation for Placement Drive - ${companyName}`;
 
         // 1. Read the HTML
-        const templatePath = path.join(__dirname, '../templates/inviteTemplate.html');
+        const templatePath = path.join(__dirname, '../template/inviteTemplate.html');
         let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
 
         // 2. Setup the tracking pixel

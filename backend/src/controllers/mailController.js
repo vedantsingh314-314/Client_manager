@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const Company = require('../models/Company');
 const EmailLog = require('../models/EmailLog');
-const { sendCustomEmail } = require('../services/mailService');
+const { sendCustomEmail } = require('../services/mailServices');
 
 const sendMailToCompany = async (req,res)=>{
     try {
@@ -9,7 +9,7 @@ const sendMailToCompany = async (req,res)=>{
         if (!companyId) {
             return res.status(400).json({ success: false, error: 'Company ID is required.' });
         }
-        const company=await company.findById(companyId);
+        const company=await Company.findById(companyId);
         if(!company){
             return res.status(400).json({success: false, error : 'Company not found'});
         }
@@ -23,7 +23,7 @@ const sendMailToCompany = async (req,res)=>{
             const trackingId = uuidv4(); // tracking 
             const isSent = await sendCustomEmail(hr.email, company.name, trackingId);
 
-            if(isent){
+            if(isSent){
                 await EmailLog.create({
                     hr_contact_id: hr._id,
                     company_id: company._id,
@@ -41,7 +41,8 @@ const sendMailToCompany = async (req,res)=>{
             message: `Successfully sent ${successfulSends} emails to ${company.name}.`
         });
         }
-    } catch (error) {
+    }  catch (error) {
+        console.error('❌ Error in sendMailToCompany:', error.message);
         return res.status(500).json({
             success: false,
             message :'server error while sending the mail'

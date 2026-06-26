@@ -2,6 +2,8 @@ const express = require('express')
 const cors=require('cors')
 
 const companyRoutes=require('./routes/companyRoutes.js')
+const mailRoutes = require('./routes/mailRoutes');
+
 
 const app=express();
 
@@ -13,5 +15,5 @@ app.get("/health",(req,res)=>{
 });
 
 app.use('/api/companies',companyRoutes);
-
+app.use('/api/mail',mailRoutes);
 module.exports=app;
