@@ -1,7 +1,7 @@
 const express = require('express')
 const cors=require('cors')
 
-const companyRoutes=require('./routes/companyRoutes.js')
+const companyRoutes =require('./routes/companyRoutes.js')
 const mailRoutes = require('./routes/mailRoutes');
 
 
